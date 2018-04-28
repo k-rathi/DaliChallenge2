@@ -1,0 +1,19 @@
+{
+    "plugins": {
+        "node": true,
+        "es_modules": {}
+    },
+    "libs": [
+        "react",
+        "browser"
+    ],
+    "plugins": {
+        "jsx": {},
+        "node" : { },
+        "complete_strings": {},
+        "doc_comment": {
+      "fullDocs": true
+     }
+   },
+    "ecmaVersion": 6
+}
