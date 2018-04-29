@@ -1,10 +1,33 @@
 .App {
   text-align: center;
   display:flex;
+  justify-content:flex-end;
   height: 100%;
   width: 100%;
-  background: url('https://upload.wikimedia.org/wikipedia/commons/8/83/Equirectangular_projection_SW.jpg');
-  background-size: 100% 100%;
+}
+
+img[src*="http://mappy.dali.dartmouth.edu"]{
+  border: 100px solid black;
+  display:flex;
+  border-radius:50%;
+}
+
+.title {
+  color: #424141;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255,255,255,.9);
+  justify-content: center;
+  display:flex;
+  flex-direction: column;
+  position:fixed;
+  z-index: 99;
+  padding: 1% 1%;
+  font-size: 1.5em;
+}
+
+.code {
+  font-size: .5em;
 }
 
 .App-logo {

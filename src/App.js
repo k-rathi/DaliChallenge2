@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.css';
 import { MyMapComponent } from './map.jsx';
-
-class App extends Component {
+const fancystyles = require('./snazzymaps.json');
+class App extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            baseUrl: "http://mappy.dali.dartmouth.edu/"
+            hoveredElement: {},
+            clickedElement: "null",
+            baseUrl: "http://mappy.dali.dartmouth.edu/",
+            toggledval: true
         }
     }
 
@@ -22,27 +24,50 @@ class App extends Component {
             });
     }
 
-    loadData( data ) {
-        this.setState({data});
+    hover = (data) => {
+      console.log("hover");
+      this.setState({hoveredElement: data, toggledval: true})
     }
 
-    render = () => {
-        let data = this.state.data;
+    unhover = (data) => {
+      console.log("unhover");
+      this.setState({hoveredElement: {}, clickedElement: "null",toggledval: false})
+    }
 
+    toggleInfo = () => {
+      console.log("toggleinfo");
+      this.setState({toggledval: !this.state.toggledval});
+    }
+    clickIcon = () => {
+      if (this.state.clickedElement === "null")  {
+        this.setState({clickedElement: this.state.hoveredElement})
+      } else {
+        this.setState({clickedElement: "null"})
+      }
+    }
+    render = () => {
         return (
         <div className="App" >
+          <div className="title">DALI '17<a className="code" href="https://github.com/k-rathi/DaliChallenge">code on github</a></div>
           <MyMapComponent
+            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIxwKO-s7ldF5PWW0qOb1KH_BVEhLpAI"
+            loadingElement={<div style={{ height: `100%` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
             isMarkerShown={true}
-            data={data}
-            containerElement={<div style={{ height: `100vh`, width: `100vw`}}/>}
-            mapElement={<div style={{ height:`100%`}} /> }
-          />
-        {
-            this.state.data.map((person, i)  => {
-                (<img className="photo" src={this.state.baseUrl +  person.iconUrl} />)
-            })
-        }
+            buildModal={this.modal}
+            clickIcon={this.clickIcon}
+            toggledval= {this.state.toggledval}
+            toggleInfo={this.toggleInfo}
 
+            clicked={this.state.clickedElement}
+
+            hovered={this.state.hoveredElement}
+            hover={this.hover}
+            unhover={this.unhover}
+
+            data={this.state.data}
+            containerElement={<div style={{ height:`100vh`, width: `100vw`}}/>}
+          />
         </div>
         )
       }
