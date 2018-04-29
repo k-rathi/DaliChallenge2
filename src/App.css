@@ -1,37 +1,26 @@
 .App {
   display:flex;
-  align-item
-  justify-content:space-around;
   flex-direction: column;
   height: 100%;
   width: 100%;
 }
 
 img[src*="http://mappy.dali.dartmouth.edu"]{
-  border: 100px solid black;
   display:flex;
   border-radius:50%;
 }
 
 .selector {
-  color: #424141;
-  border-radius: 5px;
-  text-align: center;
-  background-color: rgba(255,255,255,.9);
-  align-self: flex-start;
-  position:fixed;
-  z-index: 99;
-  padding: 1% 1%;
-  margin-top: 3%;
-  font-size: 1em;
-
-
+  width: 20%;
+  position:absolute;
+  z-index: 1;
 }
+
 .title {
   color: #424141;
   border-radius: 5px;
   text-align: center;
-  background-color: rgba(255,255,255,.9);
+  background-color: rgb(255,255,255);
   display:flex;
   align-self: flex-end;
   flex-direction: column;

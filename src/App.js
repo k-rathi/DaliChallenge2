@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react';
 import './App.css';
 import { MyMapComponent } from './map.jsx';
+import Select from 'react-select';
+
 const fancystyles = require('./snazzymaps.json');
 class App extends PureComponent {
     constructor(props) {
@@ -13,7 +15,7 @@ class App extends PureComponent {
             baseUrl: "http://mappy.dali.dartmouth.edu/",
             toggledval: true,
             selector: RegExp('/*/'),
-            id: 'All'
+            selectedOption: '17'
         }
     }
 
@@ -29,9 +31,9 @@ class App extends PureComponent {
     }
 
     selectorSet = (selector) => {
-      selector = RegExp(selector.target.value);
+      selector = RegExp(selector.value);
       console.log(selector);
-      this.setState({datasent: []});
+      this.setState({datasent: [], selectedOption: selector.value});
       this.setState({selector}, () => {
         let nextData = [];
         this.state.data.map( (person, j ) =>  {
@@ -70,11 +72,20 @@ class App extends PureComponent {
         return (
         <div className="App" >
           <div className="title">DALI '17<a className="code" href="https://github.com/k-rathi/DaliChallenge">code on github</a></div>
-          <select className="selector" onChange={this.selectorSet}>
-            <option value="17W"> 17W </option>
-            <option value="17S"> 17S </option>
-            <option selected value='17'> All </option>
-          </select>
+          <div className="selector">
+          <Select
+            autofocus
+            name="select"
+            defaultValue='17'
+            value={this.state.selectedOption}
+            onChange={this.selectorSet}
+            options={[
+              {value: '17W', label: '17W'},
+              {value: '17S', label: '17S'},
+              {value: '17', label: 'All' }
+            ]}
+          />
+        </div>
           <MyMapComponent
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIxwKO-s7ldF5PWW0qOb1KH_BVEhLpAI"
             loadingElement={<div style={{ height: `100%` }} />}

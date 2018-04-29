@@ -12,7 +12,7 @@ return (<GoogleMap
   defaultCenter={{lat: 43.7044, lng:-72.2887}}
   >
   { props.data.map( (person, i ) =>
-    person.iconUrl === props.hovered.iconUrl ?
+
     <Marker
       key={i}
       clickable={true}
@@ -22,10 +22,13 @@ return (<GoogleMap
       onMouseOver={ () => props.hover(person) }
       onMouseOut={ () => props.unhover(person) }
       title= { person.name }
-      style={{border: 10}}
+      style={{border: '100px solid black'}}
       shape={{coords: [45,45,45], type: "circle"}}
-      icon = {{
+      icon = { person.iconUrl === props.hovered.iconUrl ? {
           scaledSize: { width: 90, height: 90 },
+          url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`
+      } : {
+          scaledSize: { width: 65, height: 65 },
           url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`
       }}
       position = {{
@@ -41,29 +44,8 @@ return (<GoogleMap
         </InfoWindow>
       : <div></div>
       }
-
-    </Marker> : <Marker
-      key={i}
-      animation={window.google.maps.Animation.DROP}
-      defaultClickable={true}
-      zIndex={1}
-      shape={{coords: [35,35,35], type: "circle"}}
-      onClick={props.buildModal}
-      onMouseOver={ () => props.hover(person) }
-      onMouseOut={ () => props.unhover(person) }
-      title= { person.name }
-      style={{border: 10}}
-      icon = {{
-          scaledSize: { width: 70, height: 70 },
-          url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`
-      }}
-      position = {{
-        lat: person.lat_long[0],
-        lng: person.lat_long[1]
-      }}
-    >
-
-    </Marker>, this)}
+    </Marker>
+    , this)}
 </GoogleMap>)
   }
 ));
