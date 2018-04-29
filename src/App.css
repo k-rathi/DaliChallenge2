@@ -1,7 +1,8 @@
 .App {
-  text-align: center;
   display:flex;
-  justify-content:flex-end;
+  align-item
+  justify-content:space-around;
+  flex-direction: column;
   height: 100%;
   width: 100%;
 }
@@ -12,13 +13,27 @@ img[src*="http://mappy.dali.dartmouth.edu"]{
   border-radius:50%;
 }
 
+.selector {
+  color: #424141;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(255,255,255,.9);
+  align-self: flex-start;
+  position:fixed;
+  z-index: 99;
+  padding: 1% 1%;
+  margin-top: 3%;
+  font-size: 1em;
+
+
+}
 .title {
   color: #424141;
   border-radius: 5px;
   text-align: center;
   background-color: rgba(255,255,255,.9);
-  justify-content: center;
   display:flex;
+  align-self: flex-end;
   flex-direction: column;
   position:fixed;
   z-index: 99;

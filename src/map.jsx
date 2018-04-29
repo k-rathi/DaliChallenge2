@@ -7,7 +7,7 @@ import * as fancy from "./snazzymaps.json";
 export const MyMapComponent = withScriptjs(withGoogleMap((props) => {
 
 return (<GoogleMap
-  defaultOptions={{styles: fancy, fullscreenControl: false}}
+  defaultOptions={{styles: fancy, mapTypeControl: false, fullscreenControl: false}}
   defaultZoom={8}
   defaultCenter={{lat: 43.7044, lng:-72.2887}}
   >

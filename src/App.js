@@ -7,10 +7,13 @@ class App extends PureComponent {
         super(props);
         this.state = {
             data: [],
+            datasent: [],
             hoveredElement: {},
             clickedElement: "null",
             baseUrl: "http://mappy.dali.dartmouth.edu/",
-            toggledval: true
+            toggledval: true,
+            selector: RegExp('/*/'),
+            id: 'All'
         }
     }
 
@@ -20,13 +23,31 @@ class App extends PureComponent {
           return response.json();
             })
             .then( (data) => {
+                this.setState({datasent: data});
                 this.setState({data});
             });
     }
 
+    selectorSet = (selector) => {
+      selector = RegExp(selector.target.value);
+      console.log(selector);
+      this.setState({datasent: []});
+      this.setState({selector}, () => {
+        let nextData = [];
+        this.state.data.map( (person, j ) =>  {
+            for(let i = 0; i < person["terms_on"].length; i++) {
+              if(person["terms_on"][i].match(this.state.selector)) {
+                nextData.push(person);
+              }
+            }
+        });
+        this.setState({datasent: nextData});
+      });
+    }
+
     hover = (data) => {
       console.log("hover");
-      this.setState({hoveredElement: data, toggledval: true})
+      this.setState({hoveredElement: data, clickedElement: data, toggledval: true})
     }
 
     unhover = (data) => {
@@ -49,12 +70,17 @@ class App extends PureComponent {
         return (
         <div className="App" >
           <div className="title">DALI '17<a className="code" href="https://github.com/k-rathi/DaliChallenge">code on github</a></div>
+          <select className="selector" onChange={this.selectorSet}>
+            <option value="17W"> 17W </option>
+            <option value="17S"> 17S </option>
+            <option selected value='17'> All </option>
+          </select>
           <MyMapComponent
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIxwKO-s7ldF5PWW0qOb1KH_BVEhLpAI"
             loadingElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             isMarkerShown={true}
-            buildModal={this.modal}
+            selector={this.state.selector}
             clickIcon={this.clickIcon}
             toggledval= {this.state.toggledval}
             toggleInfo={this.toggleInfo}
@@ -65,7 +91,8 @@ class App extends PureComponent {
             hover={this.hover}
             unhover={this.unhover}
 
-            data={this.state.data}
+            selector={this.state.selector}
+            data={this.state.datasent}
             containerElement={<div style={{ height:`100vh`, width: `100vw`}}/>}
           />
         </div>
