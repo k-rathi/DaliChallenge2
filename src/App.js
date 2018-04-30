@@ -5,20 +5,6 @@ import Select from 'react-select';
 import Modal from 'react-modal';
 import Iframe from 'react-iframe';
 
-const customStyles = {
-  overlay : {
-    "z-index": "3"
-  }
-  //   overflow              : 'unset',
-  //   top                   : '50%',
-  //   left                  : '50%',
-  //   right                 : 'auto',
-  //   bottom                : 'auto',
-  //   marginRight           : '-50%',
-  //   transform             : 'translate(-50%, -50%)'
-  // }
-}
-const fancystyles = require('./snazzymaps.json');
 class App extends PureComponent {
     constructor(props) {
         super(props);
@@ -32,11 +18,10 @@ class App extends PureComponent {
             selector: RegExp('/*/'),
             selectedOption: '17',
             modalIsOpen: false,
-            iframedata: "http://mappy.dali.dartmouth.edu/",
+            iframedata: "",
             currPerson: ""
         }
         this.openModal = this.openModal.bind(this);
-        this.afterOpenModal = this.afterOpenModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
     componentDidMount() {
@@ -56,7 +41,7 @@ class App extends PureComponent {
       this.setState({datasent: [], selectedOption: selector.value});
       this.setState({selector}, () => {
         let nextData = [];
-        this.state.data.map( (person, j ) =>  {
+        this.state.data.forEach( (person) =>  {
             for(let i = 0; i < person["terms_on"].length; i++) {
               if(person["terms_on"][i].match(this.state.selector)) {
                 nextData.push(person);
@@ -67,15 +52,19 @@ class App extends PureComponent {
       });
     }
     hover = (data) => {
-      this.setState({hoveredElement: data, currPerson: data, iframedata: this.state.baseUrl + data.url, toggledval: true})
+      let frameurl = (data.url.substr(0, 2) === "//" ) ?  "http://" + data.url : (data.url.substr(0, 4) === "http") ? data.url : this.state.baseUrl + data.url;
+      if(this.state.currPerson.url === data.url) {
+        this.setState({hoveredElement: data, toggledval: true});
+        return;
+      };
+      this.setState({iframedata: frameurl, hoveredElement: data, currPerson: data, toggledval: true})
     }
     unhover = (data) => {
       this.setState({hoveredElement: {}, toggledval: false})
     }
 
     clickIcon = () => {
-      // console.log(this.state.clickedElement);
-      this.state.clickedElement = ! this.state.clickedElement;
+      this.setState({clickedElement: !this.state.clickedElement});
       if (this.state.clickedElement)  {
           this.openModal();
       } else {
@@ -84,30 +73,22 @@ class App extends PureComponent {
     }
 
     openModal() {
-      console.log(this.state.iframedata);
         this.setState({modalIsOpen: true});
       }
 
-    afterOpenModal() {
-        // references are now sync'd and can be accessed.
-
-    }
-
     closeModal() {
-      this.setState({clickedElement: false, currPerson: "", modalIsOpen: false});
+      this.setState({clickedElement: false, currPerson: "", iframedata: "", modalIsOpen: false});
     }
-
 
     render = () =>
         <div className="App" >
           <div className="title">DALI '17
             <a className="code" href="https://github.com/k-rathi/DaliChallenge">code on github</a>
           </div>
-          <div className="wemodaling">
+          <div>
           <Modal
             className="modal"
             isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
             onRequestClose={this.closeModal}
             style={{
               overlay: {
@@ -117,15 +98,20 @@ class App extends PureComponent {
           >
             <div className= "flex-modal">
               <div className="flex-row">
-                <div className="thumbnail-flexed"><img className="thumb" src={`http://mappy.dali.dartmouth.edu/${this.state.currPerson.iconUrl}`}/></div>
+                <div className="thumbnail-flexed"><img alt="" className="thumb" src={`http://mappy.dali.dartmouth.edu/${this.state.currPerson.iconUrl}`}/></div>
               <div className="flex-col">
                 <div id="name">{this.state.currPerson.name}</div>
                 <div id="message">{this.state.currPerson.message}</div>
               </div>
+              <div id="projects"><div> Projects: </div> {
+                this.state.currPerson.project && this.state.currPerson.project.map((project, i) => {
+                  return (<div key={i} className="prj"> {project} </div>)
+                })}
+              </div>
             </div>
               <div className="iframe-container">
               <Iframe
-                url={this.state.iframedata}
+                url={this.state.iframedata !== "" ? this.state.iframedata : "http://www.myguysolutions.com/wp-content/uploads/2010/01/404-basic.gif"}
                 width="97.5%"
                 height="96%"
               /></div>
@@ -151,7 +137,6 @@ class App extends PureComponent {
             loadingElement={<div style={{ height: `100%` }} />}
             mapElement={<div style={{ height: `100%` }} />}
             isMarkerShown={true}
-            selector={this.state.selector}
             clickIcon={this.clickIcon}
             toggledval= {this.state.toggledval}
             toggleInfo={this.toggleInfo}

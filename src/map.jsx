@@ -14,16 +14,15 @@ return (<GoogleMap
   { props.data.map( (person, i ) =>
 
     <Marker
-      key={i}
-      clickable={true}
-      zIndex={10}
-      onClick={props.clickIcon}
-      animation={window.google.maps.Animation.DROP}
+      key={ i }
+      clickable={ true }
+      onClick={ props.clickIcon }
+      animation={ window.google.maps.Animation.DROP }
       onMouseOver={ () => props.hover(person) }
       onMouseOut={ () => props.unhover(person) }
       title= { person.name }
-      zIndex={person.iconUrl === props.hovered.iconUrl ?  3 : 2 }
-      shape={person.iconUrl === props.hovered.iconUrl ? {coords: [45,45,45], type: "circle"} : {coords: [32.5,32.5,32.5], type: "circle"}}
+      zIndex={ person.iconUrl === props.hovered.iconUrl ?  3 : 2 }
+      shape={ person.iconUrl === props.hovered.iconUrl ? {coords: [45,45,45], type: "circle"} : {coords: [32.5,32.5,32.5], type: "circle"}}
       icon = { person.iconUrl === props.hovered.iconUrl ? {
           scaledSize: { width: 90, height: 90 },
           url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`
