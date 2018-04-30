@@ -22,8 +22,8 @@ return (<GoogleMap
       onMouseOver={ () => props.hover(person) }
       onMouseOut={ () => props.unhover(person) }
       title= { person.name }
-      style={{border: '100px solid black'}}
-      shape={{coords: [45,45,45], type: "circle"}}
+      zIndex={person.iconUrl === props.hovered.iconUrl ?  3 : 2 }
+      shape={person.iconUrl === props.hovered.iconUrl ? {coords: [45,45,45], type: "circle"} : {coords: [32.5,32.5,32.5], type: "circle"}}
       icon = { person.iconUrl === props.hovered.iconUrl ? {
           scaledSize: { width: 90, height: 90 },
           url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`
@@ -36,7 +36,7 @@ return (<GoogleMap
         lng: person.lat_long[1]
       }}
       >
-      { person.iconUrl === props.clicked.iconUrl ?
+      { person.iconUrl === props.hovered.iconUrl ?
         <InfoWindow >
           <div>
             {`${person.name} : ${person.message}`}
