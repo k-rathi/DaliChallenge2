@@ -1,11 +1,11 @@
 import React from 'react';
 import Select from 'react-select';
 
-// Fixed sidebar with selector and DALI lab logo. Logo taken from http://dali.dartmouth.edu/.
+// Fixed sidebar with selector and DALI lab logo. Logo taken from https://dali.dartmouth.edu/.
 export const Fixed = (props) =>
   <div className="fixed-pos">
     <div className="title">
-      <a width="10%" href="http://dali.dartmouth.edu/">
+      <a width="10%" href="https://dali.dartmouth.edu/">
         <img alt="DALI Lab" style={{width: '200px'}} src="https://bit.ly/2HE3bfy"/>
       </a>
       <a className="code" href="https://github.com/k-rathi/DaliChallenge2">code on github</a>

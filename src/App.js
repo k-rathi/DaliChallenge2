@@ -14,7 +14,7 @@ class App extends PureComponent {
             datasent: [],
             hoveredElement: {},
             clickedElement: false,
-            baseUrl: "http://mappy.dali.dartmouth.edu/",
+            baseUrl: "https://mappy.dali.dartmouth.edu/",
             toggledval: true,
             selector: RegExp('/*/'),
             selectedOption: '17',

@@ -17,7 +17,7 @@ export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
     // create all markers given the json data. Attach several propagated event handlers to change
     // state of the container component App. Maybe too much ternary, but cleans up code so not sure.
-    <Marker 
+    <Marker
       key={ i }
       clickable={ true }
       onClick={ props.clickIcon }
@@ -33,9 +33,9 @@ export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
         : {coords: [32.5,32.5,32.5], type: "circle"}}
       icon = { person.iconUrl === props.hovered.iconUrl
         ? { scaledSize: { width: 90, height: 90 },
-            url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`}
+            url: `https://mappy.dali.dartmouth.edu/${person.iconUrl}`}
         : { scaledSize: { width: 65, height: 65 },
-            url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`}
+            url: `https://mappy.dali.dartmouth.edu/${person.iconUrl}`}
       }
       position = {{
         lat: person.lat_long[0],
