@@ -22,6 +22,8 @@ class App extends PureComponent {
             iframedata: "",
             currPerson: ""
         }
+        this.closeModal = this.closeModal.bind(this);
+        this.openModal = this.openModal.bind(this);
     }
 
     // add the json data on componentDidMount, process and save to state.
