@@ -33,9 +33,9 @@ export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
         : {coords: [32.5,32.5,32.5], type: "circle"}}
       icon = { person.iconUrl === props.hovered.iconUrl
         ? { scaledSize: { width: 90, height: 90 },
-            url: `https://mappy.dali.dartmouth.edu/${person.iconUrl}`}
+            url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`}
         : { scaledSize: { width: 65, height: 65 },
-            url: `https://mappy.dali.dartmouth.edu/${person.iconUrl}`}
+            url: `http://mappy.dali.dartmouth.edu/${person.iconUrl}`}
       }
       position = {{
         lat: person.lat_long[0],

@@ -14,7 +14,7 @@ class App extends PureComponent {
             datasent: [],
             hoveredElement: {},
             clickedElement: false,
-            baseUrl: "https://mappy.dali.dartmouth.edu/",
+            baseUrl: "http://mappy.dali.dartmouth.edu/",
             toggledval: true,
             selector: RegExp('/*/'),
             selectedOption: '17',
@@ -94,7 +94,7 @@ class App extends PureComponent {
     }
 
     // rendering method.
-    // Referenced http://dali.dartmouth.edu/ for favicon and DALI title image
+    // Referenced props//dali.dartmouth.edu/ for favicon and DALI title image
     render = () =>
         <div className="App" >
           <Fixed

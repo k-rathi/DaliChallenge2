@@ -19,7 +19,7 @@ export const ModalContainer = (props) =>
       <div className="flex-row">
         <div className="thumbnail-flexed">
           {props.currPerson.iconUrl
-            ? <img alt="thumbnail" className="thumb" src={`https://mappy.dali.dartmouth.edu/${props.currPerson.iconUrl}`}/>
+            ? <img alt="thumbnail" className="thumb" src={`http://mappy.dali.dartmouth.edu/${props.currPerson.iconUrl}`}/>
             : <div className="thumb"></div>}
         </div>
         <div className="flex-col">
