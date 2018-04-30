@@ -3,8 +3,6 @@ import React from 'react';
 import { InfoWindow, withGoogleMap, GoogleMap, Marker, withScriptjs } from "react-google-maps";
 import * as fancy from "./snazzymaps.json";
 
-
-
 // Presentational component for map
 export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
@@ -19,7 +17,7 @@ export const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 
     // create all markers given the json data. Attach several propagated event handlers to change
     // state of the container component App. Maybe too much ternary, but cleans up code so not sure.
-    <Marker
+    <Marker 
       key={ i }
       clickable={ true }
       onClick={ props.clickIcon }
