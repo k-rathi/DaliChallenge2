@@ -1,6 +1,6 @@
-###README
+### README
 
-###DALI Challenge 2 - Mappy
+### DALI Challenge 2 - Mappy
 
 This App was built using Create React App. Dependencies are listed in package.json.
 
