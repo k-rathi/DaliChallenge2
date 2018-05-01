@@ -105,7 +105,7 @@ body>#root>div {
   width: 100%;
 }
 
-img[src*="https://mappy.dali.dartmouth.edu"] {
+img[src*="http://mappy.dali.dartmouth.edu"] {
   display: flex;
   border-radius: 50%;
 }

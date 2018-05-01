@@ -4,6 +4,7 @@ import { MyMapComponent } from './map.jsx';
 import Modal from 'react-modal';
 import {Fixed} from './Fixed.jsx';
 import {ModalContainer} from './ModalContainer.jsx';
+import * as members from './members.json';
 
 // standard class constructor for React in ES6.
 class App extends PureComponent {
@@ -27,18 +28,23 @@ class App extends PureComponent {
     }
 
     // add the json data on componentDidMount, process and save to state.
+    // DUE TO ERRORS WITH HTTP vs HTTPS FOR DEPLOY, ATTACHED JSON LOCALLY.
     // Initialize the data sent to the map with all people.
     // Attach the modal to the body.
     componentDidMount() {
-        fetch(this.state.baseUrl + "members.json")
-        .then(function(response) {
-          return response.json();
-            })
-            .then( (data) => {
-                this.setState({datasent: data});
-                this.setState({data});
-                Modal.setAppElement('body');
-            });
+      this.setState({datasent: members, data: members});
+      Modal.setAppElement('body');
+
+        // fetch("members.json")
+        // .then(function(response) {
+        //   console.log(response.json());
+        //   return response.json();
+        //     })
+        //     .then( (data) => {
+        //         this.setState({datasent: data});
+        //         this.setState({data});
+        //         Modal.setAppElement('body');
+        //     });
     }
 
     // Filter set method to decide who to show based on term.
