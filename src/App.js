@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import './App.css';
-import { MyMapComponent } from './map.jsx';
+import { MyMapComponent } from './Map.jsx';
 import Modal from 'react-modal';
 import {Fixed} from './Fixed.jsx';
 import {ModalContainer} from './ModalContainer.jsx';
-import * as members from './members.json';
+// UNCOMMENT LINE BELOW FOR HTTPS/LOCAL FILE
+// import * as members from './members.json';
 
 // standard class constructor for React in ES6.
 class App extends PureComponent {
@@ -32,18 +33,20 @@ class App extends PureComponent {
     // Initialize the data sent to the map with all people.
     // Attach the modal to the body.
     componentDidMount() {
-      this.setState({datasent: members, data: members});
-      Modal.setAppElement('body');
+      // UNCOMMENT LINES BELOW FOR HTTPS/LOCAL FILE
 
-        // fetch(this.state.baseUrl + "members.json")
-        // .then(function(response) {
-        //   return response.json();
-        //     })
-        //     .then( (data) => {
-        //         this.setState({datasent: data});
-        //         this.setState({data});
-        //         Modal.setAppElement('body');
-        //     });
+      // this.setState({datasent: members, data: members});
+      // Modal.setAppElement('body');
+
+      // COMMENT OUT REST OF FUNCTION FOR HTTPS/LOCAL FILE
+        fetch(this.state.baseUrl + "members.json")
+        .then(function(response) {
+          return response.json();
+            })
+            .then( (data) => {
+                this.setState({datasent: data, data});
+                Modal.setAppElement('body');
+            }).
     }
 
     // Filter set method to decide who to show based on term.
@@ -112,6 +115,7 @@ class App extends PureComponent {
             currPerson={this.state.currPerson}
             iframeUrl={this.state.iframedata}
           />
+          {/* map component loaded from map.jsx */}
           <MyMapComponent
             googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjIxwKO-s7ldF5PWW0qOb1KH_BVEhLpAI"
             loadingElement={<div style={{ height: `100%` }} />}
