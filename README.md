@@ -15,7 +15,7 @@ To bundle and minify the javascript and css for production builds, run
 
 `yarn build`.
 
-There will be a static build in the `/builds` folder that can be served through any webhosting setup.
+There will be a static build in the `/build` folder that can be served through any webhosting setup.
 
 ## Hosting and Complications
 
