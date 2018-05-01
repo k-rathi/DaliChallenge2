@@ -35,9 +35,8 @@ class App extends PureComponent {
       this.setState({datasent: members, data: members});
       Modal.setAppElement('body');
 
-        // fetch("members.json")
+        // fetch(this.state.baseUrl + "members.json")
         // .then(function(response) {
-        //   console.log(response.json());
         //   return response.json();
         //     })
         //     .then( (data) => {
