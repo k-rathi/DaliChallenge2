@@ -23,7 +23,7 @@ Due to issues with the members.json being deployed on an http server rather than
 
 If you want to see what the https hosting looks like with the static local .json, i deployed the github pages here: <https://k-rathi.github.io/DaliChallenge2/>
 
-To see a working http server deployment, I also used surge to deploy one with the .json data here: <http://mappy-challenge.surge.sh>
+To see a working http server deployment, I also used surge to deploy one with an HTTP GET request for the  .json data here: <http://mappy-challenge.surge.sh>
 
 Components have been split up into a overarching container (App.js) and several presentational components (map.jsx, Fixed.jsx, ModalContainer.jsx)
 
